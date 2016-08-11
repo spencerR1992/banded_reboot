@@ -14,7 +14,7 @@ test:
   post:
     - cf api https://api.ng.bluemix.net
     - cf auth $USER $PASSWORD
-    - cf target  -s banded
+    - cf target -o $USER -s banded
     - cf a
 
 deployment:

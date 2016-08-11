@@ -1,0 +1,6 @@
+---
+applications:
+- name: banded
+  memory: 128M
+  command: sh run.sh
+  buildpack: https://github.com/cloudfoundry/python-buildpack

@@ -21,7 +21,7 @@ deployment:
   production:
     branch: master
     commands:
-      - cf push banded-master
+      - cf push banded-master --no-start
 
   development:
     branch: dev

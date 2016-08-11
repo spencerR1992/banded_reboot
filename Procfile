@@ -1,0 +1,1 @@
+web: gunicorn banded.wsgi --workers 3

@@ -13,9 +13,7 @@ dependencies:
 #   override:
 #     - flake8 ./
 #     - nosetests ./
-test:
-  override:
-    - ./doNothing.sh
+
 
 deployment:
   production:

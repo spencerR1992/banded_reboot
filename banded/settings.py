@@ -118,20 +118,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+#AWS Storage and Connection
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_STORAGE_BUCKET_NAME = os.getenv('BUCKET_NAME')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_KEY')
+AWS_S3_CUSTOM_DOMAIN= os.getenv('AWS_BUCKET_URL')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-STATIC_URL = '/static/'
+STATIC_URL = "https://%s/static/" % AWS_S3_CUSTOM_DOMAIN
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 
 
-#AWS Storage and Connection
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-AWS_STORAGE_BUCKET_NAME = os.getenv('BUCKET_NAME')
-AWS_ACCESS_KEY_ID = os.getenv('AWS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_KEY')
-AWS_CALLING_FORMAT= os.getenv('AWS_BUCKET_URL')
+

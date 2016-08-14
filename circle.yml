@@ -19,9 +19,9 @@ deployment:
   production:
     branch: master
     commands:
-      - cf push banded-master 
+      - cf push $MASTER_NAME
 
   development:
     branch: dev
     commands:
-      - cf push banded-dev
+      - cf push $DEV_NAME

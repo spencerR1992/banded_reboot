@@ -6,7 +6,7 @@ dependencies:
     - cf api https://api.ng.bluemix.net
     - cf api https://api.ng.bluemix.net
     - cf auth $USER $PASSWORD
-    - cf target -o $USER -s banded
+    - cf target -o $USER -s $SPACE_NAME
     - cf a
 
 # test:

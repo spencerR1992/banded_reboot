@@ -4,26 +4,24 @@ dependencies:
     - sudo dpkg -i cf-cli_amd64.deb
     - cf -v
     - cf api https://api.ng.bluemix.net
+    - cf api https://api.ng.bluemix.net
+    - cf auth $USER $PASSWORD
+    - cf target -o $USER -s $SPACE_NAME
+    - cf a
 
 # test:
 #   override:
 #     - flake8 ./
 #     - nosetests ./
 
-test:
-  post:
-    - cf api https://api.ng.bluemix.net
-    - cf auth $USER $PASSWORD
-    - cf target -o $USER -s banded
-    - cf a
 
 deployment:
   production:
     branch: master
     commands:
-      - cf push banded-master 
+      - cf push $MASTER_NAME
 
   development:
     branch: dev
     commands:
-      - cf push banded-dev
+      - cf push $DEV_NAME

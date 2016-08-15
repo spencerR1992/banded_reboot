@@ -3,7 +3,9 @@
 {% if form.errors %} 
 	<p>Error</p>
 {% endif %}
-	<h1 class = 'test'>Boom</h1>
+	<div class="test">
+		<h1>Boom</h1>
+	</div>
 	<form action = '/u/auth' method = 'post'>
 		{% csrf_token %}
 		<label for = 'email'>

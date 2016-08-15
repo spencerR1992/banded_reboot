@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'sass_processor',
     'users',
+
 ]
 
 MIDDLEWARE = [
@@ -136,6 +138,16 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.dirname(BASE_DIR)
 STATICFILES_DIRS = (
      os.path.join(BASE_DIR, "static"), 
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+)
+
+SASS_PROCESSOR_INCLUDE_DIRS = (
+    os.path.join(os.path.join(BASE_DIR, "static"), 'scss'),
 )
 
 

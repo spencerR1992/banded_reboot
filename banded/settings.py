@@ -51,6 +51,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = ['banded.backend.EmailAuth']
+
 ROOT_URLCONF = 'banded.urls'
 
 TEMPLATES = [

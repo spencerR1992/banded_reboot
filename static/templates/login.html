@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if form.errors %} 
+	<p>Error</p>
+{% endif %}
+	<div class="test">
+		<h1>Boom</h1>
+	</div>
+	<form action = '/u/auth' method = 'post'>
+		{% csrf_token %}
+		<label for = 'email'>
+			Email:
+		</label>
+		<input  type = 'text' name = 'email' value = '' id = 'email'>
+		<label for = 'password'>
+			Password: 
+		</label>
+		<input type = 'password' name = 'password' value = '' id = 'password'>
+		<input type = 'submit' value = 'login'/>
+	</form>
+{% endblock %}

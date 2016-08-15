@@ -132,13 +132,11 @@ AWS_S3_CUSTOM_DOMAIN= os.getenv('AWS_BUCKET_URL')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-STATIC_URL = "https://%s/static/" % AWS_S3_CUSTOM_DOMAIN
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.dirname(BASE_DIR)
+STATICFILES_DIRS = (
+     os.path.join(BASE_DIR, "static"), 
+)
 
 
 

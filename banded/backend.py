@@ -1,5 +1,10 @@
 from django.contrib.auth.models import User
 
+
+
+'''
+Custom backend to handle authentication with only email and password. 
+'''
 class EmailAuth:
 	def authenticate(self, email = '', password = ''):
 		try:

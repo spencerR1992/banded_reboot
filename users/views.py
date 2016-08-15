@@ -4,13 +4,11 @@ from django.http import HttpResponseBadRequest
 
 # Create your views here.
 
-
+#TODO:remove print statements, and properly handle the redirect. 
 def authorization(request):
 	try:
 		em = request.POST.get('email', '')
-		print 'em: ', em
 		pw = request.POST.get('password', '')
-		print 'pw: ', pw
 		user = authenticate(email = em, password = pw)
 		if user is not None:
 			print 'user successfully logged in'

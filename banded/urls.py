@@ -21,7 +21,6 @@ import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home),
-    url(r'^login$', views.loginTest),
     url(r'^style$', views.styleSheet),
     url(r'^u/', include('users.urls')), 
 ]

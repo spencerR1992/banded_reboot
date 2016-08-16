@@ -1,10 +1,11 @@
-{% extends 'base.html' %}
-{% block content %}
 {% if form.errors %} 
 	<p>Error</p>
 {% endif %}
+{% if user.is_authenticated %}
+{% include "logged_in_home.html" %}
+{% else %}
 	<div class="test">
-		<h1>Boom</h1>
+		<h1>login form</h1>
 	</div>
 	<form action = '/u/auth' method = 'post'>
 		{% csrf_token %}
@@ -18,4 +19,4 @@
 		<input type = 'password' name = 'password' value = '' id = 'password'>
 		<input type = 'submit' value = 'login'/>
 	</form>
-{% endblock %}
+{% endif %}

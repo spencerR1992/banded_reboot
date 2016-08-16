@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2> home.html</h2>
-
+	{% if user.is_authenticated %}
+		<h2>user authenticated block in home.html</h2>
+		{% include "user_home.html" %}
+	{% else %}
+		<h2> user is not authenticated block in home.html</h2>
+		{% include "login.html" %}
+		{% include "splash_page.html" %}
+	{% endif %}
 {% endblock %}

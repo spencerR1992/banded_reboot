@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'storages',
     'sass_processor',
     'users',
+    'events',
 
 ]
 

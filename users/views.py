@@ -7,8 +7,8 @@ from django.http import HttpResponseBadRequest
 #TODO:remove print statements, and properly handle the redirect. 
 def authorization(request):
 	try:
-		em = request.POST.get('email', '')
-		pw = request.POST.get('password', '')
+		em = request.POST['email']
+		pw = request.POST['password']
 		user = authenticate(email = em, password = pw)
 		if user is not None:
 			login(request, user)

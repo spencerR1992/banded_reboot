@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^$', views.home),
     url(r'^style$', views.styleSheet),
     url(r'^u/', include('users.urls')), 
+    url(r'^e/', include('events.urls')),
 ]

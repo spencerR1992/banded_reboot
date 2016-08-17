@@ -12,7 +12,7 @@ def authorization(request):
 		user = authenticate(email = em, password = pw)
 		if user is not None:
 			login(request, user)
-			return render(request, 'home.html')
+			return redirect('/')
 		else:
 			print 'login failed'
 			return render(request, 'home.html')

@@ -15,7 +15,43 @@
 		<link rel = 'stylesheet' href = "{% sass_src 'scss/base.scss' %}" type = 'text/css'>
 		<link rel="stylesheet" type="text/css" href="{% static 'flatpickr/dist/flatpickr.min.css' %}">
 		<script src="{% static 'flatpickr/dist/flatpickr.js' %}"></script>
+		<script src="{% static 'js/jstz.min.js' %}"></script>
+		 <script language="javascript">
+	        function getTimezoneName() {
+	            timezone = jstz.determine();
+	            return timezone.name();
+	        }
+	        function getCookie(name) {
+				var cookieValue = null;
+				if (document.cookie && document.cookie != '') {
+					var cookies = document.cookie.split(';');
+					for (var i = 0; i < cookies.length; i++) {
+						var cookie = jQuery.trim(cookies[i]);
+        				// Does this cookie string begin with the name we want?
+        				if (cookie.substring(0, name.length + 1) == (name + '=')) {
+        					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        				break;
+        				}		
+    				}
+				}
+				return cookieValue;
+			}
+			var csrftoken = getCookie('csrftoken');
+			//Ajax call
+			function csrfSafeMethod(method) {
+			// these HTTP methods do not require CSRF protection
+			return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+			}
+			$.ajaxSetup({
+			    crossDomain: false, // obviates need for sameOrigin test
+			    beforeSend: function(xhr, settings) {
+			    	if (!csrfSafeMethod(settings.type)) {
+			    		xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			    	}
+			    }
+			});
 
+    	</script>
 	</head>
 
 	<body>

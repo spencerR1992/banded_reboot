@@ -1,0 +1,38 @@
+<script>
+function deleteEvent(id){
+	$.ajax({
+        url : "/e/delete/" + String(id),
+        type : 'GET', 
+        success : function(data){
+        	console.log('delete success');
+            $("#event_console").replaceWith(data); 
+        },
+    });
+}
+$(document).ready(function(e) {   
+	   $(".flatpickr").flatpickr();
+	   //This is to pass the timezone. 
+	 });
+
+	var fireCreateEvent = function(){
+		$.ajax({
+			url : "/e/create", 
+			type : 'POST',
+			data : {
+				name: $("input[name=name]").val(), 
+				date: $("input[name=date]").val(), 
+				start_time: $("input[name=start_time]").val(),
+				end_time: $("input[name=end_time]").val(),
+				timezone: getTimezoneName()
+			}, 
+			success: function(data){
+				console.log('create success');
+				$("#event_console").replaceWith(data);
+			},
+		});
+	}
+</script>
+<h3>Create an Event</h3>
+{% include "event_creation_form.html" %}
+<h3>Events</h3>
+{% include "event_list.html" %}

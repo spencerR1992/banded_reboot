@@ -1,1 +1,4 @@
 <p>{{ event.name }}</p>
+<p>Start: {{event.start_datetime| date:"l F d , Y @ P"}}</p>
+<p>End: {{event.end_datetime| date:"l F d , Y @ P"}}</p>
+<button onclick ="deleteEvent({{event.id}})" type="button">Delete Event</button>

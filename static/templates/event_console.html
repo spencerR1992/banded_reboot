@@ -23,11 +23,17 @@ $(document).ready(function(e) {
 				date: $("input[name=date]").val(), 
 				start_time: $("input[name=start_time]").val(),
 				end_time: $("input[name=end_time]").val(),
-				timezone: getTimezoneName()
+				timezone: getTimezoneName(), 
+				event_user_id: {{EventUser.id}}
 			}, 
 			success: function(data){
-				console.log('create success');
+				$( ":input" ).val('')
+				$("input[name=start_time]").val('20:00'),
+				$("input[name=end_time]").val('20:00'),
 				$("#event_console").replaceWith(data);
+			},
+			error: function(error){
+				console.log(error);
 			},
 		});
 	}

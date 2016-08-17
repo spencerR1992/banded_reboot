@@ -18,8 +18,7 @@ def eventConsole(request):
 @login_required
 def createEvent(request):
     try:
-    	print request.POST
-        myU = EventUser.objects.get(user=request.user)
+        myU = EventUser.objects.get(id = request.POST['event_user_id'])
         name = request.POST['name']
         date = request.POST['date']
         timezone = request.POST['timezone']

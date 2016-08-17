@@ -1,18 +1,21 @@
-<script>
-	$(document).ready(function(e) {   
-	   $(".flatpickr").flatpickr();
-	 });
-</script>
-
-<form action = '/e/create' method = 'post'>
-	{% csrf_token %}
 	<label for = 'name'>
 		Event Name:
 	</label>
 	<input  type = 'text' name = 'name' value = '' id = 'name'>
-	<label for = 'name'>
-		Event Name:
+
+	<label for = 'date'>
+		Event Date:
 	</label>
-	<input id = 'flatpickr' class=flatpickr data-enable-time=true>
-	<input type = 'submit' value = 'Create Event'/>
-</form>
+	<input name = 'date' class=flatpickr data-date-format="m/d/Y">
+
+	<label for = 'start_time'>
+		Event Start Time:
+	</label>
+	<input name = 'start_time' class=flatpickr data-enable-time=true data-no-calendar=true value="09:00">
+
+	<label for = 'name'>
+		Event End Time:
+	</label>
+	<input name = 'end_time' class=flatpickr data-enable-time=true data-no-calendar=true value="09:00">
+	<!-- <button type = 'submit' value = 'Create Event'/> -->
+	<button name = 'submit' onclick = "fireCreateEvent()" type = "button">Create Event</button>

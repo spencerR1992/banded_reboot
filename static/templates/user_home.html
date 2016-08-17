@@ -2,11 +2,5 @@
 <a href = "/u/logout">
 	<button type="button">Log Out</button>
 </a>
-<h3>Create an Event</h3>
-{% include "event_creation_form.html" %}
-
-<h3>Events</h3>
-{% for event in EventUser.event_set.all %}
-	{% include "event_list_item.html" %}
-{% endfor %} 
+{% include "event_console.html" %}
 

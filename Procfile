@@ -1,1 +1,1 @@
-web: sh run.sh
+web: gunicorn banded.wsgi --workers 3

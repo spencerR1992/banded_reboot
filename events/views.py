@@ -4,6 +4,7 @@ from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from models import Event
 from users.models import EventUser
+from random import randint
 # Create your views here.
 
 
@@ -25,7 +26,7 @@ def createEvent(request):
         start_datetime = lD(date, request.POST['start_time'], timezone)
         end_datetime = lD(date, request.POST['end_time'], timezone)
         Event(name=name, user=myU, start_datetime=start_datetime,
-              end_datetime=end_datetime).save()
+              end_datetime=end_datetime, id = randint(0,99999999999999999999)).save()
         return render(request, 'event_list.html', 
     		{"EventUser": EventUser.objects.get(user=request.user)})
     except Exception, e:

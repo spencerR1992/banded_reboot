@@ -7,6 +7,7 @@ from users.models import EventUser
 
 
 class Event(models.Model):
+	id = models.BigIntegerField(primary_key=True)
 	name = models.CharField(max_length = 500)
 	user = models.ForeignKey(EventUser, on_delete=models.CASCADE)
 	start_datetime = models.DateTimeField()

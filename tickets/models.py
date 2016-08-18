@@ -17,3 +17,5 @@ class Ticket(models.Model):
 	check_in_time = models.DateTimeField(null = True)
 	claimed = models.BooleanField(default = False)
 	is_valid = models.BooleanField(default = True)
+	claimed_by = models.EmailField(null = True)
+	qr_code_svg = models.CharField(max_length = 4000, null = True)

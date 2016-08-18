@@ -29,3 +29,6 @@ def deleteTixGroup(request, ticketGroupID):
 		return render(request, 'event_list_item.html', {'event': e})
 	except Exception, e:
 		return HttpResponseBadRequest(str(e), status=400)
+
+
+

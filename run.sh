@@ -4,4 +4,5 @@ then SERVER_PORT=5000;
 else SERVER_PORT="$VCAP_APP_PORT";
 fi
 echo port is $SERVER_PORT
+sudo apt-get install libcairo2-dev
 python manage.py runserver --noreload 0.0.0.0:$SERVER_PORT

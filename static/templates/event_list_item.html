@@ -1,4 +1,11 @@
-<p>{{ event.name }}</p>
-<p>Start: {{event.start_datetime| date:"l F d , Y @ P"}}</p>
-<p>End: {{event.end_datetime| date:"l F d , Y @ P"}}</p>
-<button onclick ="deleteEvent({{event.id}})" type="button">Delete Event</button>
+<div id = "event-{{event.id}}">
+	<p>{{ event.name }}</p>
+	<p>Start: {{event.start_datetime| date:"l F d , Y @ P"}}</p>
+	<p>End: {{event.end_datetime| date:"l F d , Y @ P"}}</p>
+	<button onclick ="deleteEvent({{event.id}})" type="button">Delete Event</button>
+	{% include 'ticket_creation_form.html' %}
+
+	{% for ticketgroup in event.ticketgroup_set.all %}
+		{% include 'ticket_group_item.html' %}
+	{% endfor %}
+</div>

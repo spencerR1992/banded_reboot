@@ -37,6 +37,39 @@ $(document).ready(function(e) {
 			},
 		});
 	}
+	function deleteTicketGroup(tix_group_id, event_id){
+		console.log('tix_group_id', tix_group_id);
+		console.log('event_id', event_id);
+	$.ajax({
+        url : "/t/delete/" + String(tix_group_id),
+        type : 'GET', 
+        success : function(data){
+            $("#event-" + String(event_id)).replaceWith(data); 
+        },
+        error: function(error){
+        	console.log(error);
+        },
+    });
+	}
+	var fireCreateTickets = function(event_id){
+		var s = "#ticket-"+ String(event_id);
+		$.ajax({
+			url : "/t/create", 
+			type : 'POST',
+			data : {
+				name: $(s + " input[name=name]").val(), 
+				description: $(s + " textarea[name=description]").val(), 
+				count: $(s + " input[name=count]").val(), 
+				event_id: event_id
+			}, 
+			success: function(data){
+				$("#event-" + String(event_id)).replaceWith(data);
+			},
+			error: function(error){
+				console.log(error);
+			},
+		});
+	}
 </script>
 <h3>Create an Event</h3>
 {% include "event_creation_form.html" %}

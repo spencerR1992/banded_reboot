@@ -1,0 +1,22 @@
+<div id = 'ticket-{{event.id}}'>
+	<label for = 'name'>
+			Ticket Type:
+	</label>
+	<input  type = 'text' name = 'name' value = '' id = 'name'>
+
+	<label for = 'count'>
+		Ticket Description/Information:
+	</label>
+	<textarea name = 'description' id = 'description' rows="4" cols="50">
+	description
+	</textarea>
+
+	<label for = 'count'>
+		Ticket Count:
+	</label>
+	<input type="number" name="count" min="1" max="50">
+
+	<button name = 'submit' onclick = "fireCreateTickets({{event.id}})" type = "button">
+		Create Tickets
+	</button>
+</div>

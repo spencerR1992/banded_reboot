@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+HOSTNAME = os.getenv('HOSTNAME')
 
 # Application definition
 

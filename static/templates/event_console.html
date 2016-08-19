@@ -33,7 +33,7 @@ $(document).ready(function(e) {
 				$("#event_console").replaceWith(data);
 			},
 			error: function(error){
-				console.log(error);
+				$("#event_form_errors").replaceWith(error['responseText']);
 			},
 		});
 	}
@@ -72,6 +72,7 @@ $(document).ready(function(e) {
 	}
 </script>
 <h3>Create an Event</h3>
+{% include 'event_form_errors.html' %}
 {% include "event_creation_form.html" %}
 <h3>Events</h3>
 {% include "event_list.html" %}

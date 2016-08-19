@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+	<h2>Ticket Claim</h2>
+	<select name = 'tixgroup_type'>
+		{% for ticketgroup in event.ticketgroup_set.all %}
+			<option type="radio" name="{{ticketgroup.name}}" value="{{ticketgroup.id}}">
+				{{ticketgroup.name}}
+			</option>
+		{% endfor %}
+	</select>
+	<label for = 'count'>
+		How many do you need?
+	</label>
+	<input type="number" name="count" min="1" max="50">
+
+	<label for = 'name'>
+		Your Email: (where we'll send the tix!)
+	</label>
+	<input  type = 'text' name = 'email' value = '' id = 'email'>
+{% endblock %}
+
+

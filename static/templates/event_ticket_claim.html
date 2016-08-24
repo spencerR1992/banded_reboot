@@ -1,7 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
+<script>
+var fireClaimTicket = function(){
+		$.ajax({
+			url : "/t/claim", 
+			type : 'POST',
+			data : {
+				ticket_group_id: $("#ticket_group_id").val(), 
+				num_tix: $("#num_tix").val(), 
+				email: $("#email").val(),
+			}, 
+			success: function(data){
+				console.log(data);
+			},
+			error: function(error){
+				console.log(error);
+			},
+		});
+	}
+</script>
 	<h2>Ticket Claim</h2>
-	<select name = 'tixgroup_type'>
+	<select  id = 'ticket_group_id'>
 		{% for ticketgroup in event.ticketgroup_set.all %}
 			<option type="radio" name="{{ticketgroup.name}}" value="{{ticketgroup.id}}">
 				{{ticketgroup.name}}
@@ -11,7 +30,7 @@
 	<label for = 'count'>
 		How many do you need?
 	</label>
-	<input type="number" name="count" min="1" max="50">
+	<input id = 'num_tix' type="number" name="count" min="1" max="50">
 
 	<label for = 'name'>
 		Your Email: (where we'll send the tix!)

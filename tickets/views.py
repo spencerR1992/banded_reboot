@@ -30,5 +30,21 @@ def deleteTixGroup(request, ticketGroupID):
 	except Exception, e:
 		return HttpResponseBadRequest(str(e), status=400)
 
+def claimTix(request):
+    try:
+        print request.POST
+        tixGroup = int(request.POST['ticket_group_id'])
+        numTix = request.POST['num_tix']
+        email = request.POST['email']
+        tix = Ticket.objects.filter(ticket_group = tixGroup, claimed=False)
+        if tix.count() < int(numTix):
+            print 'not enough tickets :/'
+        else:
+            print 'yeah, enough tickets'
+        return 'yeah'
+    except Exception, e:
+        print 'damn'
+        return 'damn'
+
 
 

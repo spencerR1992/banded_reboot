@@ -10,5 +10,6 @@ psycopg2==2.6.2
 PyQRCode==1.2.1
 pytz==2016.6.1
 rcssmin==1.0.6
+requests==2.11.1
 rjsmin==1.0.12
 six==1.10.0

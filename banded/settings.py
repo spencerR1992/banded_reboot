@@ -33,6 +33,8 @@ REGION = os.getenv('REGION')
 
 SENDER_EMAIL=os.getenv('SENDER_EMAIL')
 
+CONVERSION_ENDPOINT=os.getenv('CONVERSION_ENDPOINT')
+
 # Application definition
 
 INSTALLED_APPS = [

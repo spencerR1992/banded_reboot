@@ -4,4 +4,5 @@ import views
 urlpatterns = [
 	url(r'^create$', views.createTix),
 	url(r'^delete/(?P<ticketGroupID>\w{0,30})$', views.deleteTixGroup),
+	url(r'^claim$', views.claimTix),
 ]

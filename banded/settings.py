@@ -29,6 +29,12 @@ ALLOWED_HOSTS = []
 
 HOSTNAME = os.getenv('HOSTNAME')
 
+REGION = os.getenv('REGION')
+
+SENDER_EMAIL=os.getenv('SENDER_EMAIL')
+
+CONVERSION_ENDPOINT=os.getenv('CONVERSION_ENDPOINT')
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -131,6 +137,7 @@ USE_TZ = True
 #AWS Storage and Connection
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_STORAGE_BUCKET_NAME = os.getenv('BUCKET_NAME')
+BUCKET_ENDPOINT = "https://s3-us-west-2.amazonaws.com/" + AWS_STORAGE_BUCKET_NAME + '/'
 AWS_ACCESS_KEY_ID = os.getenv('AWS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_KEY')
 AWS_S3_CUSTOM_DOMAIN= os.getenv('AWS_BUCKET_URL')

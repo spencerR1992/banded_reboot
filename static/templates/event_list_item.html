@@ -1,6 +1,6 @@
 <div id = "event-{{event.id}}">
 	<p>{{ event.name }}</p>
-	<p>{{event.hash_code}}</p>
+	<p>navigate to http://localhost:8000/e/{{event.hash_code}} to get tix claim form</p>
 	<p>Start: {{event.start_datetime| date:"l F d , Y @ P"}}</p>
 	<p>End: {{event.end_datetime| date:"l F d , Y @ P"}}</p>
 	<p>Ticket Link (put this on your event!): {{hostname}}e/{{event.hash_code}}</p>

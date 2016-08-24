@@ -1,0 +1,9 @@
+<body>
+	<h2> Your tickets!</h2>
+	{% for ticket in tickets %}
+		 <p>{{ticket.id}}</p>
+		 <img src='{{ticket.qr_code_url}}'>
+	{% endfor %}
+</body>
+
+

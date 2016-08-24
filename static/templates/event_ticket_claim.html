@@ -12,30 +12,17 @@ var fireClaimTicket = function(){
 			}, 
 			success: function(data){
 				console.log(data);
+				$("#ticket-box").replaceWith(data);
+				$("#ticket-form-errors").replaceWith('')
 			},
 			error: function(error){
-				console.log(error);
+				$("#ticket-form-errors").replaceWith(error['responseText'])
 			},
 		});
 	}
 </script>
-	<h2>Ticket Claim</h2>
-	<select  id = 'ticket_group_id'>
-		{% for ticketgroup in event.ticketgroup_set.all %}
-			<option type="radio" name="{{ticketgroup.name}}" value="{{ticketgroup.id}}">
-				{{ticketgroup.name}}
-			</option>
-		{% endfor %}
-	</select>
-	<label for = 'count'>
-		How many do you need?
-	</label>
-	<input id = 'num_tix' type="number" name="count" min="1" max="50">
-
-	<label for = 'name'>
-		Your Email: (where we'll send the tix!)
-	</label>
-	<input  type = 'text' name = 'email' value = '' id = 'email'>
+	{% include 'ticket_form_errors.html' %}
+	{% include 'ticket_claim_form.html' %}
 {% endblock %}
 
 

@@ -3,7 +3,8 @@ from models import TicketGroup, Ticket
 from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from events.models import Event
-from utils import createTixGroup
+from utils import createTixGroup, createTixPng, sendTicketEmail
+from django.conf import settings
 # Create your views here.
 
 @login_required
@@ -30,19 +31,33 @@ def deleteTixGroup(request, ticketGroupID):
 	except Exception, e:
 		return HttpResponseBadRequest(str(e), status=400)
 
+#TODO add a max number of claimable tickets. 
 def claimTix(request):
     try:
         print request.POST
         tixGroup = int(request.POST['ticket_group_id'])
-        numTix = request.POST['num_tix']
+        numTix = int(request.POST['num_tix'])
         email = request.POST['email']
         tix = Ticket.objects.filter(ticket_group = tixGroup, claimed=False)
         if tix.count() < int(numTix):
-            print 'not enough tickets :/'
+            return render(request, "ticket_form_errors.html", {'error': "Not enough tickets are left :/"}, status=400)
+        elif ((email =='') or (email == None)):
+            return render(request, "ticket_form_errors.html", {'error': "please provide a valid email"}, status=400)
         else:
-            print 'yeah, enough tickets'
+            tix = tix[:numTix]
+            for ticket in tix:
+                tixurl = settings.BUCKET_ENDPOINT + createTixPng(ticket)
+                ticket.qr_code_url = tixurl
+                ticket.claimed = False # TODO: change to true
+                ticket.claimed_by = email
+                ticket.save()
+            sendTicketEmail("Your tickets to the show! change this eventually!", email, tix)
+            return render(request, 'ticket_success.html', {'email': email})
+
+
         return 'yeah'
     except Exception, e:
+        print str(e)
         print 'damn'
         return 'damn'
 

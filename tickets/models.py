@@ -19,3 +19,5 @@ class Ticket(models.Model):
 	is_valid = models.BooleanField(default = True)
 	claimed_by = models.EmailField(null = True)
 	qr_code_svg = models.CharField(max_length = 4000, null = True)
+	qr_code_url = models.CharField(max_length = 400, null = True)
+	

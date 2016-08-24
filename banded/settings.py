@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 HOSTNAME = os.getenv('HOSTNAME')
-#TODO: don't make this hardcoded. 
+
 REGION = os.getenv('REGION')
 
 SENDER_EMAIL=os.getenv('SENDER_EMAIL')

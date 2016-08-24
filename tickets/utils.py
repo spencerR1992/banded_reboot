@@ -19,7 +19,6 @@ def createTixGroup(ticket_group):
 
 
 def createTixSvg(id):
-    # todo make this 'something' not hardcoded
     buffer = io.BytesIO()
     pyqrcode.create(settings.HOSTNAME + "t/" + str(id)).svg(buffer, scale=10)
     return str(buffer.getvalue())
@@ -27,7 +26,6 @@ def createTixSvg(id):
 
 def createTixPng(ticket):
     try:
-        data = {}
         data = {'svg': ticket.qr_code_svg.replace('\n', '')}
         headers = {'content-type': 'application/json'}
         url = settings.CONVERSION_ENDPOINT + 'svg-to-png'

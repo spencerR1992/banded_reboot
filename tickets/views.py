@@ -34,7 +34,6 @@ def deleteTixGroup(request, ticketGroupID):
 #TODO add a max number of claimable tickets. 
 def claimTix(request):
     try:
-        print request.POST
         tixGroup = int(request.POST['ticket_group_id'])
         numTix = int(request.POST['num_tix'])
         email = request.POST['email']
@@ -53,8 +52,6 @@ def claimTix(request):
                 ticket.save()
             sendTicketEmail("Your tickets to the show! change this eventually!", email, tix)
             return render(request, 'ticket_success.html', {'email': email})
-
-
         return 'yeah'
     except Exception, e:
         print str(e)

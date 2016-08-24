@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from models import Event
 from users.models import EventUser
 from random import randint
-import settings
+from django.conf import settings
 # Create your views here.
 
 

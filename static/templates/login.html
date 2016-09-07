@@ -1,8 +1,9 @@
-{% if form.errors %} 
-	<p>Error</p>
-{% endif %}
+
 	<div class="test">
 		<h1>login form</h1>
+		{% for error in login_errors %}
+			{{error}}
+		{% endfor %}
 	</div>
 	<form action = '/u/auth' method = 'post'>
 		{% csrf_token %}

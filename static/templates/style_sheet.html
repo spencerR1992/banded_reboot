@@ -1,6 +1,116 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1> components go here! </h1>
+	<h1>Banded Styleguide</h1>
+
+	<div class="slab">
+		<h2>Primary Colors</h2>
+		<div class="container">
+			<div class="swatch">
+				<span class="swatch-preview" style="background-color:#25ced1;"></span>
+				<ul class="list-no-bullets">
+					<li><strong>Dark Turquoise</strong></li>
+					<li>rgb(100, 100, 100)</li>
+					<li>#25ced1</li>
+					<li>$turquoise</li>
+				</ul>
+			</div>
+			<div class="swatch">
+				<span class="swatch-preview" style="background-color:#ff8a5b;"></span>
+				<ul class="list-no-bullets">
+					<li><strong>Coral</strong></li>
+					<li>rgb(100, 100, 100)</li>
+					<li>#ff8a5b</li>
+					<li>$coral</li>
+				</ul>
+			</div>
+			<div class="swatch">
+				<span class="swatch-preview" style="background-color:#ea526f;"></span>
+				<ul class="list-no-bullets">
+					<li><strong>Dark Pink</strong></li>
+					<li>rgb(100, 100, 100)</li>
+					<li>#ea526f</li>
+					<li>$pink</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="slab">
+		<h2>Secondary Colors</h2>
+		<div class="container">
+			<div class="swatch">
+				<span class="swatch-preview" style="background-color:#fff;"></span>
+				<ul class="list-no-bullets">
+					<li><strong>White</strong></li>
+					<li>rgb(100, 100, 100)</li>
+					<li>#fff</li>
+					<li>$white</li>
+				</ul>
+			</div>
+			<div class="swatch">
+				<span class="swatch-preview" style="background-color:#fceade;"></span>
+				<ul class="list-no-bullets">
+					<li><strong>Antique White</strong></li>
+					<li>rgb(100, 100, 100)</li>
+					<li>#fceade</li>
+					<li>$beige</li>
+				</ul>
+			</div>
+			<div class="swatch">
+				<span class="swatch-preview" style="background-color:#464646;"></span>
+				<ul class="list-no-bullets">
+					<li><strong>Dark Gray</strong></li>
+					<li>rgb(100, 100, 100)</li>
+					<li>#464646</li>
+					<li>$dark-gray</li>
+				</ul>
+			</div>
+			<div class="swatch">
+				<span class="swatch-preview" style="background-color:#d0d0d0;"></span>
+				<ul class="list-no-bullets">
+					<li><strong>Light Gray</strong></li>
+					<li>rgb(100, 100, 100)</li>
+					<li>#d0d0d0</li>
+					<li>$lgiht-gray</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="slab">
+		<pre class="language-css">
+			<code>.teaser .teaser-description {
+				padding: 1eem;
+				border: 1px solid;
+			}
+			</code>
+		</pre>
+	</div>
+
+	<div class="slab">
+		<h2>Forms</h2>
+		<form action = '/u/auth' method = 'post'>
+			{% csrf_token %}
+			<div class="input-centered">
+				<label for = 'email'>
+					Email:
+				</label>
+				<input  type = 'text' name = 'email' value = '' id = 'email'>
+				<label for = 'password'>
+					Password: 
+				</label>
+				<input type = 'password' name = 'password' value = '' id = 'password'>
+				<p class="help-text"><a href="/forgotpassword">Forgot password?</a></p>
+				<p class="help-text"><a href="/forgotpassword">Forgot username?</a></p>
+				<button type = 'submit' value = 'Login' class="btn btn-primary">Login</button>
+			</div>
+		</form>
+
+
+
+	</div>
+
+</div>
 
 {% endblock %}

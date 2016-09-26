@@ -1,6 +1,142 @@
-.test {
-	font-size: 20px;
+body {
+	font-size: 10px;
+}
+$title-font: 'Montserrat';
+$body-font :'Open Sans';
+
+$turquoise: #25ced1;
+$coral: #ff8a5b;
+$pink: #ea526f;
+$white: #fff;
+$beige: #fceade;
+$light-gray: #d0d0d0;
+$dark-gray: #464646;
+
+h1, h2 {
+	font-family: $title-font;
+}
+h1 {
+	font-weight: 700;
+	font-size: 2.4em;
+}
+h2 {
+	font-weight: 400;
+	font-size: 2em;
+}
+h3, h4, h5, h6, li, p {
+	font-family:'Open Sans', sans-serif;
+	font-weight: 400;
+}
+h3 {
+	font-size: 1.6em;
+}
+p, li {
+	font-size: 1.2em;
+	margin: 0;
+}
+a {
+	color: $turquoise;
+	text-decoration: none;
+	margin: 0;
+}
+
+.help-text {
+	color: $light-gray;
+	font-size: 1.2em;
+}
+
+.list-no-bullets {
+	list-style: none;
+	padding: 0;
+}
+
+.slab {
+	background-color: #f0f0f0;
+	padding: 20px 50px;
+	margin: 20px auto;
+	max-width: 1000px;
+	.container {
+		display: flex;
+		justify-content: flex-start;
+		.swatch {
+			width: 25%;
+			max-width: 200px;
+			.swatch-preview {
+				height: 100px;
+				width: 100px;
+				border-radius: 50px;
+				display: block;
+			}
+		}
+	}
+}
+
+.btn-primary {
+	background-color: $turquoise;
+}
+.btn {
+	border: none;
+	padding: 10px 20px;
+	width: auto;
+	margin-right: auto;
+	float: right;
+	font-size: 1.2em;
+	color: white;
+	font-family: $title-font;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	transition: .3s ease-in-out;
+}
+.btn:hover {
+	cursor: pointer;
+	opacity: .75;
+}
+
+form {
+	width: 300px;
+	background-color: white;
+	padding: 50px 75px;
+	border-radius: 2px;
+	margin: 0 auto;
+	.input-centered {
+		input, label {
+			clear: both;
+			display: block;
+		}
+		input {
+			width: 280px;
+			padding: 5px 10px;
+			border: none;
+			font-family: $body-font;
+			font-size: 1.4em;
+			margin-bottom: 15px;
+			transition: .1s ease-in-out;
+			box-shadow: 0 2px $dark-gray;
+			border: 1px solid transparent;
+		}
+		input:hover {
+			box-shadow: 0 2px $turquoise;
+		}
+		input:focus {
+			outline: none;
+			box-shadow: 0 2px $turquoise;
+			border: 1px solid $turquoise;
+		}
+		label {
+			font-family: $title-font;
+			font-size: 1.2em;
+		}
+	}
+}
+
+@media screen and (min-width:640px) {
 	h1 {
-		color: purple;
+		font-size: 2.8em;
+	}
+	h2 {
+		font-size: 2.4em;
+	}
+		h3, h4, h5, h6, li, p {
+		font-size: 1.6em;
 	}
 }

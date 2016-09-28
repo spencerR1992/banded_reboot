@@ -1,9 +1,7 @@
 
 	<div class="test">
 		<h1>login form</h1>
-		{% for error in login_errors %}
-			{{error}}
-		{% endfor %}
+		{{login_errors}}
 	</div>
 	<form action = '/u/auth' method = 'post'>
 		{% csrf_token %}

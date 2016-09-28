@@ -3,30 +3,25 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseBadRequest
 from models import EventUser
 from django.contrib.auth.models import User
+from utils.validationUtils import check_fields
 
 # Create your views here.
 
 #TODO:remove print statements, and properly handle the redirect. 
 def authorization(request):
 	try:
+		needed = ['email', 'password']
+		check_fields(needed, request.POST)
 		em = request.POST['email']
 		pw = request.POST['password']
-		err_message = []
-		if (em == ''):
-			err_message.append('Please provide an email')
-		if (pw == ''):
-			err_message.append('Please enter your password!')
-		if (len(err_message)>0):
-			return render(request, 'home.html', {'login_errors':err_message})
+		user = authenticate(email = em, password = pw)
+		if user is not None:
+			login(request, user)
+			return redirect('/')
 		else:
-			user = authenticate(email = em, password = pw)
-			if user is not None:
-				login(request, user)
-				return redirect('/')
-			else:
-				return render(request, 'home.html', {'login_errors':['The username or password you provided was incorrect']})
+			return render(request, 'home.html', {'login_errors':'The username or password you provided was incorrect'})
 	except Exception, e:
-		return HttpResponseBadRequest(str(e), status = 400)
+		return render(request, 'home.html', {'login_errors': str(e)})
 
 
 def logOut(request):

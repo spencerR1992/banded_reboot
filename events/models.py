@@ -15,6 +15,7 @@ class Event(models.Model):
 	start_datetime = models.DateTimeField()
 	end_datetime = models.DateTimeField()
 	hash_code = models.CharField(max_length=40, default = getRandString, unique = True, null = True)
+	location = models.CharField(max_length=400, null = True)
 	
 	class Meta:
 		ordering = ['start_datetime']

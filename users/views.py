@@ -24,7 +24,6 @@ def authorization(request):
 				login(request, user)
 				return redirect('/')
 			else:
-				print 'login failed'
 				return render(request, 'home.html', {'login_errors':['The username or password you provided was incorrect']})
 	except Exception, e:
 		return HttpResponseBadRequest(str(e), status = 400)
@@ -72,9 +71,6 @@ def createUser(request):
 		if user is not None:
 			login(request, user)
 			return redirect('/')
-		else:
-			print 'login failed'
-			return render(request, 'home.html')
 	except Exception, e:
 		return HttpResponseBadRequest(str(e), status=400)
 

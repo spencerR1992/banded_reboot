@@ -2,6 +2,9 @@
 	<h2> Your tickets!</h2>
 	{% for ticket in tickets %}
 		 <p>{{ticket.id}}</p>
+		 <p>{{ticket.ticket_group.event.name}}</p>
+		 <p>Start: {{event.start_datetime| date:"l F d , Y @ P"}}</p>
+		 <p>{{ticket.ticket_group.name}}</p>
 		 <img src='{{ticket.qr_code_url}}'>
 	{% endfor %}
 </body>

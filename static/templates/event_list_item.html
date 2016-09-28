@@ -1,9 +1,9 @@
 <div id = "event-{{event.id}}">
 	<p>{{ event.name }}</p>
-	<p>navigate to http://localhost:8000/e/{{event.hash_code}} to get tix claim form</p>
+	This is the magic link that gives your event attendees the ability to claim tickets!  use it wisely (oooooooooh!)
+	<input type='text' value = '{{hostname}}e/{{event.hash_code}}' size=60>
 	<p>Start: {{event.start_datetime| date:"l F d , Y @ P"}}</p>
 	<p>End: {{event.end_datetime| date:"l F d , Y @ P"}}</p>
-	<p>Ticket Link (put this on your event!): {{hostname}}e/{{event.hash_code}}</p>
 	<button onclick ="deleteEvent({{event.id}})" type="button">Delete Event</button>
 	{% include 'ticket_creation_form.html' %}
 	{% for ticketgroup in event.ticketgroup_set.all %}

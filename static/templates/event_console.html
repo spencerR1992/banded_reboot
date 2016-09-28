@@ -21,6 +21,7 @@ $(document).ready(function(e) {
 			data : {
 				name: $("input[name=name]").val(), 
 				date: $("input[name=date]").val(), 
+				location: $("input[name=location]").val(), 
 				start_time: $("input[name=start_time]").val(),
 				end_time: $("input[name=end_time]").val(),
 				timezone: getTimezoneName(), 
@@ -31,6 +32,7 @@ $(document).ready(function(e) {
 				$("input[name=start_time]").val('20:00'),
 				$("input[name=end_time]").val('20:00'),
 				$("#event_console").replaceWith(data);
+				$("#event_form_errors").replaceWith("<div id = 'event_form_errors'></div>");
 			},
 			error: function(error){
 				$("#event_form_errors").replaceWith(error['responseText']);

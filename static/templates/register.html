@@ -1,0 +1,23 @@
+
+<div class="test">
+	<h1>login form</h1>
+	{% for error in registration_errors %}
+		{{error}}
+	{% endfor %}
+</div>
+<form action = '/u/register' method = 'post'>
+	{% csrf_token %}
+	<label for = 'email'>
+		Email:
+	</label>
+	<input  type = 'text' name = 'email' value = '' id = 'email'>
+	<label for = 'password'>
+		Password: 
+	</label>
+	<input type = 'password' name = 'password' value = '' id = 'password'>
+	<label for = 'organization_name'>
+		Organization Name: 
+	</label>
+	<input type = 'text' name = 'organization_name' value = '(optional)' id = 'organization_name'>
+	<input type = 'submit' value = 'Register for an Account!'/>
+</form>

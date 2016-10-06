@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-
 import views
 
 urlpatterns = [
@@ -25,4 +24,7 @@ urlpatterns = [
     url(r'^u/', include('users.urls')), 
     url(r'^e/', include('events.urls')),
     url(r'^t/', include('tickets.urls')),
+    url(r'^bowling/', include('bowling.urls'))
+
 ]
+

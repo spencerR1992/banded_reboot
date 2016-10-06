@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'users',
     'events',
     'tickets',
+    'bowling'
 
 ]
 
@@ -62,7 +63,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTHENTICATION_BACKENDS = ['banded.backend.EmailAuth']
+AUTHENTICATION_BACKENDS = ['banded.backend.EmailAuth', 'django.contrib.auth.backends.ModelBackend']
 
 ROOT_URLCONF = 'banded.urls'
 

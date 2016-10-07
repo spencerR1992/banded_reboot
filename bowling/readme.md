@@ -60,7 +60,7 @@ Decisions/Considerations
 
 
 
-
+P.S I know I didn't catch an error related the last frame and having a score of greater than 10 without getting a strike. I ran out of time. 
 
 
 

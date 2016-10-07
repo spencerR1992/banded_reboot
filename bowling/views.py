@@ -9,7 +9,7 @@ import json
 @csrf_exempt
 def gameBase(request):
     if request.method == 'GET':
-        return JR({'message': 'Message about Usage'})
+        return JR({'message': 'Hi, you might be lost!  Take a look at the readme in this directory for some guidance.'})
     elif request.method == 'POST':
         try:
             data = json.loads(request.body)
@@ -18,10 +18,9 @@ def gameBase(request):
         if ('players' not in data) or (type(data['players']) is not list) or (type(data['players'][0]) not in [str, unicode]):
             return JR({'message': "Please pass the paramter 'players' as a list of strings!"}, status=400)
         else:
-            # move this creation logic onto the model.
             g = Game(players=data['players'])
             g.save()
-            return JR({'message': 'new game created!', 'game_id': g.id})
+            return JR({'message': 'new game created! Good Luck to all the players!', 'game_id': g.id})
         return JR({'message': 'We created a game for you!'}, status=200)
     else:
         return JR({'message': 'youre lost partner'}, status=400)
@@ -33,8 +32,13 @@ def gameMain(request, gameID):
 	except: 
 		return JR({"error": "no game with that id exists! to create one, TODO fix me"}, status=400)
 	if request.method == 'GET':
-		return JR({"current_bowler": "bowlername", 'frames_left': 4, "scoreboard":[('player', 'score')]})
+		try:
+			return JR({"current_bowler": game.current_bowler,  "scoreboard": game.returnPrettyScoreCard()})
+		except: 
+			return JR({"error": "something went wrong displaying this game's data!"}, status=400)
 	elif request.method=='POST':
+		if game.current_frame==10:
+			return JR({"message": "This game is history!  If you're looking for a rematch, start a new game!"})
 		try:
 			data = json.loads(request.body)
 		except:
@@ -43,10 +47,13 @@ def gameMain(request, gameID):
 			return JR({'message': "Please pass the parameter 'roll' as an int!"}, status=400)
 		else:
 			try:
-				
 				return JR(game.addRoll(data['roll']))
 			except Exception, e:
-				return JR({"error": str(e)})
+				return JR({"error": str(e)}, status=400)
+	elif request.method =='DELETE':
+		myID = game.id
+		game.delete()
+		return JR({"message": "game %s  deleted!" % (myID)}, status=200)
 	else:
 		return JR({'message': 'youre lost partner'}, status=400)
 

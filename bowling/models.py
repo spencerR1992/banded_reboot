@@ -19,7 +19,8 @@ class Game(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.scorecard = {x: {'scoreCard': [[None, None] for z in range(10)], 'score': 0} for x in self.players}
+            self.scorecard = {x: {'scoreCard': [[None, None] for z in range(
+                9)] + [[None, None, None]], 'score': 0} for x in self.players}
             self.current_bowler = self.players[0]
         super(Game, self).save(*args, **kwargs)
 
@@ -31,10 +32,40 @@ class Game(models.Model):
         scorecard = self.scorecard
         current_frame = self.current_frame
         players = self.players
-        if current_frame == 10:
-            print 'do the last frame logic here'
+        frameScore = scorecard[current_bowler]['scoreCard'][current_frame]
+        def advanceBowler():
+            indexOfNextBowler = (players.index(current_bowler)+1) % len(players)
+            self.current_bowler = players[indexOfNextBowler]
+            cbs = self.sumScore(current_bowler, self.scorecard[current_bowler]['scoreCard'], current_frame)
+            self.scorecard[current_bowler]['score'] = cbs
+            return indexOfNextBowler
+
+        if current_frame == 9:
+            message = "Nice bowling %s! " % (current_bowler)
+            indexOfNextBowler = -1  # need this here because of the logic steps.
+            if frameScore == [None, None, None]:
+                self.scorecard[current_bowler]['scoreCard'][current_frame][0] = roll
+            elif frameScore[1] == None:
+                self.scorecard[current_bowler]['scoreCard'][current_frame][1] = roll
+                if (frameScore[0]+roll) < 10:
+                    indexOfNextBowler = advanceBowler()
+                    message = message + \
+                        " Next up is %s." % (self.current_bowler)
+            else:
+                self.scorecard[current_bowler]['scoreCard'][current_frame][2]=roll
+                #catch situation where first is not strike and first two are greater than 10. 
+                indexOfNextBowler = advanceBowler()
+                message = message + "Next up is %s." % (self.current_bowler)
+            if indexOfNextBowler==0:
+                # game over!
+                self.current_frame+=1
+                self.save()
+                return {"message":"GAME OVER!!!", "scoreCard":self.returnPrettyScoreCard()}
+            else:
+                self.save()
+                return {"message": message}
+
         else:
-            frameScore = scorecard[current_bowler]['scoreCard'][current_frame]
             if (frameScore[0] is not None) or (roll == 10):
                 # this is the last bowl for the player (that's not the last frame)
                 if roll == 10:
@@ -42,22 +73,17 @@ class Game(models.Model):
                     frameScore = [10, None]
                     message = "Strike!!! Nice job %s." % (current_bowler)
                 else:
-                    # every second bowl
+                    # second roll
                     frameScore[1] = roll
                     if sum(frameScore) > 10:
                         raise Exception(
                             'Hey! There are only ten pins!  What the heck!')
                     message = "You got %s pins %s."% (str(sum(frameScore)), current_bowler)
-                indexOfNextBowler = (
-                    players.index(current_bowler)+1) % len(players)
-                self.current_bowler = players[indexOfNextBowler]
-                # return the score card here
+                
                 self.scorecard[current_bowler][
                     'scoreCard'][current_frame] = frameScore
-                cbs = self.sumScore(
-                    current_bowler, self.scorecard[current_bowler]['scoreCard'], current_frame)
-                self.scorecard[current_bowler]['score'] = cbs
-                message = message + "Your total score is %s.  Next up is %s" % (cbs, self.current_bowler)
+                indexOfNextBowler = advanceBowler()
+                message = message + "Your total score is %s.  Next up is %s" % (self.scorecard[current_bowler]['score'], self.current_bowler)
                 returnData = {'message': message}
                 if indexOfNextBowler == 0:
                     self.current_frame += 1
@@ -72,7 +98,7 @@ class Game(models.Model):
                     'scoreCard'][current_frame] = frameScore
                 self.save()
                 if roll < 4:
-                    message = 'Aww, %s pins only?, I bet you can do better next roll %s!' % (
+                    message = 'Aww, only  %s pins?, I bet you can do better next roll %s!' % (
                         roll, current_bowler)
                 else:
                     message = 'Nice roll %s!' % (current_bowler)
@@ -81,43 +107,62 @@ class Game(models.Model):
     def sumScore(self, player, scoreCard, current_frame):
         tally = 0
         for x in range(current_frame+1):
-            if scoreCard[x] == [10, None]:
-                # strike case
-                tally += 10
-                if scoreCard[x+1] == [None, None]:
-                    # this is the no next frame case
-                    pass
-                elif scoreCard[x+1] == [10, None]:
-                    tally += 10
-                    try:
-                        tally += scoreCard[x+2][0]
-                    except:
-                        pass
+            if x == 9:
+                frame = scoreCard[9]
+                if sum(frame[:2])>=10:
+                    tally += sum(frame)
                 else:
-                    print scoreCard[x+1]
-                    tally += sum(scoreCard[x+1])
-            elif sum(scoreCard[x]) == 10:
-                tally += 10
-                if scoreCard[x+1] == [None, None]:
-                    pass
-                else:
-                    tally += scoreCard[x+1][0]
+                    tally += sum(frame[:2])
             else:
-                tally += sum(scoreCard[x])
+                if scoreCard[x] == [10, None]:
+                    # strike case
+                    tally += 10
+                    if scoreCard[x+1].count(None)>1:
+                        # this is the no next frame case
+                        pass
+                    elif scoreCard[x+1] == [10, None]:
+                        # double strike case
+                        tally += 10
+                        try:
+                            tally += scoreCard[x+2][0]
+                        except:
+                            pass
+                    else:
+                        tally += sum(scoreCard[x+1][:2])
+                elif sum(scoreCard[x]) == 10:
+                    # spare case
+                    tally += 10
+                    if scoreCard[x+1] == [None, None]:
+                        pass
+                    else:
+                        tally += scoreCard[x+1][0]
+                else:
+                    tally += sum(scoreCard[x])
         return tally
 
     def returnPrettyScoreCard(self):
         def prettyScore(scorecard):
             arr = []
-            for item in scorecard:
-            	print item
+            for item in scorecard[:-1]:
                 if item == [10, None]:
                     arr.append(' X ')
                 elif item == [None, None]:
                     arr.append(" -- ")
+                elif item[1] == None:
+                    arr.append("%s, -" % (item[0]))
                 elif sum(item) == 10:
                     arr.append(str(item[0]) + ' / ')
                 else:
                     arr.append("%s, %s" % (item[0], item[1]))
+            l = scorecard[9]
+            if l == [None, None, None]:
+                arr.append(" --- ")
+            elif sum(l[:2])>=10:
+                if sum(l[:2]) == 10:
+                    arr.append("%s, /, %s" % (l[0], l[2]))
+                else:
+                    arr.append("X, %s, %s" % (l[1],l[2]))
+            else:
+                arr.append("%s, %s, - " % (l[0], l[1]))
             return arr
         return ["|".join([x] + prettyScore(self.scorecard[x]['scoreCard']) +["Total: %s" % (self.scorecard[x]['score'])]) for x in self.players]

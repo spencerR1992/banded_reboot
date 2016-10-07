@@ -36,7 +36,7 @@ class Game(models.Model):
         def advanceBowler():
             indexOfNextBowler = (players.index(current_bowler)+1) % len(players)
             self.current_bowler = players[indexOfNextBowler]
-            cbs = self.sumScore(current_bowler, self.scorecard[current_bowler]['scoreCard'], current_frame)
+            cbs = self.sumScore(self.scorecard[current_bowler]['scoreCard'], current_frame)
             self.scorecard[current_bowler]['score'] = cbs
             return indexOfNextBowler
 
@@ -88,7 +88,7 @@ class Game(models.Model):
                 if indexOfNextBowler == 0:
                     self.current_frame += 1
                     self.save()
-                    returnData['scoreCard'] = self.returnPrettyScoreCard()
+                    returnData['scoreboard'] = self.returnPrettyScoreCard()
                 else:
                     self.save()
                 return returnData
@@ -104,7 +104,7 @@ class Game(models.Model):
                     message = 'Nice roll %s!' % (current_bowler)
                 return {"message": message}
 
-    def sumScore(self, player, scoreCard, current_frame):
+    def sumScore(self, scoreCard, current_frame):
         tally = 0
         for x in range(current_frame+1):
             if x == 9:

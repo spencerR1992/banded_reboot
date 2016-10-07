@@ -47,16 +47,16 @@ Decisions/Considerations
 
 	I took great effort to catch any errors that might come up, test all endpoints with as many random inputs as I could think of, and validate a bunch of random games against an iphone scoring app to make sure the math worked out right. 
 
-	I took great effort with this because I'm not experienced at writing tests.
-		*woah...did a candidate just admit to being 'not experienced' at something we're expressly looking for? What an idiot!*
-
+	I took great effort with this because I'm not very experienced at writing tests.
+		*woah...did a candidate just admit to being 'not very experienced' at something we're expressly looking for? What an idiot!*
 
 		*queue apologetic R&B music*
-	I have never worked in a setting where testing was highly emphasized. I haven't worked with experienced engineers who have developed best practices and methodologies for unittesting and tests in general.  Mostly I've worked in situations where I had to deliver workign code fast, and so I've relied on minimal regression testing, thourough QAing, and being able to rapidly respond to bugs or errors as they come up.  
+	I have never worked in a setting where testing was highly emphasized. I haven't worked with experienced engineers who have developed best practices and methodologies for unittesting and tests in general.  Mostly I've worked in situations where I had to deliver workign code fast, and so I've relied on minimal regression testing, thourough QAing, and being able to rapidly respond to bugs or errors as they come up.  As you can see I've written some minimal tests, and generally know how to do basic testing, but I think this is something I can improve a lot in and am eager to learn about. As I've said in my resume and my cover letter, I'm a fast learner. A few weeks with your favorite testing DSL, I'll be testing up a storm!
 
-	I want to learn how to do testing right, and as I've said in my resume and my cover letter, I'm a fast learner. A few weeks with your favorite testing DSL, I'll be testing up a storm!
+	I also focused on minimizing the queries needed for each operation.  I focus on trying to write as infrequently as possible to minimize database throughput.  So some of the operations look less than optimal concision wise to ensure expedience in the long run.  I've drunk the functional programming coolaid but in this case I was highly imperative in some places with database write considerations trumping a desire for concision. 
 
-	Lastly, I opted to go with a stripped down use of Django, without DjangoRestframework in place.  DRF gives a lot of capabilities, but I haven't worked with it in a few months and this isn't intended to be a huge multi-model API so it seemed overkill. Plus, I think the views manage to be relatively concise, despite pretty robust validations and error handling. 
+
+	Lastly, I opted to go with a stripped down use of Django, without DjangoRestframework in place.  DRF gives a lot of capabilities, but I haven't worked with it in a few months and this isn't intended to be a huge multi-model API so it seemed overkill. Plus, I think the views manage to be relatively concise, despite having pretty robust validations and error handling. 
 
 
 

@@ -1,6 +1,7 @@
 Hello! This is a bowling application I've written to demonstrate my use of python and Django. 
 
 Features/Usage
+
 	As a user I want to create a game
 		Should be able to add as many players as I want to 
 		Players must have names 
@@ -41,6 +42,7 @@ Features/Usage
 	If I had more time on this I would have used a tool called Stoplight.io to generate more thourough docs.  It's a Swagger  and mock-endpoint generator.  Basically, you can blueprint your API, and actually perform CRUD operations on a test server.  It then can generate Swagger YAML and even host documentation. But, for this small feature set, I feel confident that the above is sufficient for our purposes. 
 
 Decisions/Considerations
+
 	I've decided to use JSONFields to represent the scorecard and players.  I think  that it should be more expedient in lookup, write, and manipulation than creating subjugate models.  Plus, when would you ever really need to detach a frame from the game it is in?  I suppose you could have generated all the possible frames, but that doesn't feel clean. 
 
 	I had a bit of Scala envy about halfway through the assignment for the use of match cases or switch cases or binding.  I could have used them to match things like [*, None] where * is anything that isn't none.  It might have given me some ability to do cleaner logic in a few places.  Although...I would have had to hire a devops guy to get this deployed anywhere it could be seen :P

@@ -47,13 +47,14 @@ class Game(models.Model):
                 self.scorecard[current_bowler]['scoreCard'][current_frame][0] = roll
             elif frameScore[1] == None:
                 self.scorecard[current_bowler]['scoreCard'][current_frame][1] = roll
+                if (sum(self.scorecard[current_frame]['scoreCard'][current_frame][:2])>10) and (self.scorecard[current_bowler]['scoreCard'][current_frame][1] != 10): 
+                    raise Exception('Hey, there are only ten pins!!!!')
                 if (frameScore[0]+roll) < 10:
                     indexOfNextBowler = advanceBowler()
                     message = message + \
                         " Next up is %s." % (self.current_bowler)
             else:
-                self.scorecard[current_bowler]['scoreCard'][current_frame][2]=roll
-                #catch situation where first is not strike and first two are greater than 10. 
+                self.scorecard[current_bowler]['scoreCard'][current_frame][2]=roll 
                 indexOfNextBowler = advanceBowler()
                 message = message + "Next up is %s." % (self.current_bowler)
             if indexOfNextBowler==0:

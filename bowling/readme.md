@@ -1,6 +1,6 @@
 Hello! This is a bowling application I've written to demonstrate my use of python and Django. 
 
-Features/Usage (basepath==http://banded-dev.mybluemix.net/bowling/)
+Features/Usage (basepath==http://banded-dev.mybluemix.net/bowling/game)
 
 	As a user I want to create a game
 		Should be able to add as many players as I want to 
